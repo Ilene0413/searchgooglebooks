@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
+import SaveBtn from "../../components/SaveBtn";
 // import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../Utils/API";
 import { Col, Row, Container } from "../../components/Grid";
@@ -50,7 +51,7 @@ class Books extends Component {
         API.getBooks()
             .then(res =>
                 this.setState({
-                    books: res.data,
+                    books: res.data.items,
                     title: "",
                     authors: [],
                     description: "",
@@ -61,18 +62,31 @@ class Books extends Component {
             )
             .catch(err => console.log(err));
     };
-    // saveBook = event => {
-        // API.saveBook({
-        //     title: this.state.title,
-        //     authors: this.state.authors,
-        //     description: this.state.description,
-        //     image: this.state.image,
-        //     infoLink: this.state.infoLink,
-        //     user: "Ilene"
-        // })
-        //     .then(res => this.loadBooks())
-        //     .catch(err => console.log(err));
-    // };
+    saveBook = (event) => {
+
+        //id is returned as a string, so need to convert to integer to determine which picture was clicked
+        let id = parseInt(event.target.id);
+console.log(`in save book - id`, id);
+console.log(`book data`, this.state.title, this.state.authors, this.state.description)
+let books = [...this.state.books];
+    API.saveBook({
+        title: books[id].volumeInfo.title,
+        authors: books[id].volumeInfo.authors,
+        description: books[id].volumeInfo.description,
+        image: books[id].volumeInfo.image,
+        infoLink: books[id].volumeInfo.infoLink,
+        user: "Ilene"
+
+        // title: this.state.title,
+        // authors: this.state.authors,
+        // description: this.state.description,
+        // image: this.state.image,
+        // infoLink: this.state.infoLink,
+        // user: "Ilene"
+    })
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+    };
 
 
     deleteItem = id => {
@@ -107,7 +121,7 @@ class Books extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="sm-12">
+                    <Col size="md-6">
                         <Jumbotron>
                             <h1>
                                 Google Books Search
@@ -117,6 +131,7 @@ class Books extends Component {
                         <form>
                             <h2>Book Search</h2>
                             <Input
+                                type="text"
                                 value={this.state.title}
                                 onChange={this.handleInputChange}
                                 name="title"
@@ -134,19 +149,19 @@ class Books extends Component {
                 <Row>
                     {this.state.books.length ? (
                         <List>
-                            {this.state.books.map(
-                                book => {
+                            {this.state.books.map((book, index) => {
                                     return (
                                         <ListBook key={book._id}>
                                             title = {book.volumeInfo.title},
                                             authors = {book.volumeInfo.authors}
                                             description = {book.volumeInfo.description}
                                             image = {book.volumeInfo.smallThumbnail}
-                                            infoLink = {book.volumeInfo.infoLink}}
+                                            infoLink = {book.volumeInfo.infoLink}
+                                            <button id={index} onClick={this.saveBook}>Save Book</button> }
                                         </ListBook>
                                     );
                                 })}
-                            </List>
+                        </List>
                     ) : (<h3>no results to display</h3>
 
                         )}

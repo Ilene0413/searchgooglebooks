@@ -49,8 +49,19 @@ const bookSeed = [
     "canonicalVolumeLink": "https://books.google.com/books/about/The_Very_Hungry_Caterpillar.html?hl=&id=nbrhnQEACAAJ",
     user: "barry"
 	},
+    {title: "Good Night Moon",
+    authors: [
+        "forgot"
+       ],
+    description: "mom tells good night sotry Preschool",
+    image: "http://books.google.com/books/content?id=nbrhnQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+    infoLink: "http://books.google.com/books?id=nbrhnQEACAAJ&dq=the+very+hungry+caterpillar&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/The_Very_Hungry_Caterpillar.html?hl=&id=nbrhnQEACAAJ",
+    user: "barry"
+	}
 
 ];
+
 
 const userSeed = [
 	{
