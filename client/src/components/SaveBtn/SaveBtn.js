@@ -5,7 +5,7 @@ import React from "react";
 function SaveBtn(props) {
   return (
     <button className="save-btn" {...props} tabIndex="0">
-      Search for Books
+      Save Book
     </button>
   );
 }

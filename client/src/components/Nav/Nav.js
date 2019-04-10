@@ -11,7 +11,7 @@ function Nav() {
                             <a class="text-light" href="/">Search</a>
                         </button>
                         <button type="button" class="btn bg-info">
-                            <a class="text-white" href="/books/:id">Saved</a>
+                            <a class="text-white" href="/saved">Saved</a>
                         </button>
                         </div>
                     </h1>
