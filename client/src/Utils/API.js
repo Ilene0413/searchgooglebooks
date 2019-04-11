@@ -20,7 +20,6 @@ export default {
 	},
 	// Saves an item to the database
 	saveBook: function(bookData) {
-		console.log(`in api.js save book`)
 		return axios.post("/api/books", bookData);
 	},
 	search: function(query) {
