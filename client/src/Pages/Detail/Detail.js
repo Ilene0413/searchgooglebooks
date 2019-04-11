@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListBook } from "../components/List";
-import Jumbotron from "../components/Jumbotron";
-import ViewBtn from "../components/ViewBtn";
-import Pictureborder from "../components/Pictureborder";
-import DeleteBtn from "../components/DeleteBtn";
-import Viewbook from "../components/Viewbook";
+import Jumbotron from "../../components/Jumbotron";
+import DeleteBtn from "../../components/DeleteBtn";
+import ViewBtn from "../../components/ViewBtn";
+import Viewbook from "../../components/Viewbook";
+import Pictureborder from "../../components/Pictureborder";
+import API from "../../Utils/API";
+import { Col, Row, Container } from "../../components/Grid";
+import { List, ListBook } from "../../components/List";
 
-import API from "../Utils/API";
 
 class Detail extends Component {
 	state = {
