@@ -2,22 +2,20 @@ import React from "react";
 
 function Nav() {
     return (
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <div class="navbar-header nav navbar-nav" role="group bg-white border-info">
-                    <h1><bold>Google Books</bold>
-                    <div>
-                        <button type="button" class="btn bg-info">
-                            <a class="text-light" href="/">Search</a>
-                        </button>
-                        <button type="button" class="btn bg-info">
-                            <a class="text-white" href="/saved">Saved</a>
-                        </button>
-                        </div>
-                    </h1>
+                <div class="navbar-header navbar-expand-lg nav navbar-nav">
+                    <h1><bold>Google Books</bold></h1>
+                    <button type="button" class="btn btn-primary">
+                        <a class="text-light" href="/">Search</a>
+                    </button>
+                    <button type="button" class="btn btn-primary  ">
+                        <a class="text-white" href="/saved">Saved</a>
+                    </button>
                 </div>
             </div>
-        </nav>
+
+        </nav >
     );
 }
 export default Nav;

@@ -1,8 +1,9 @@
 import axios from "axios";
 const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
 const APIKEY = "&key=AIzaSyCAUXH5Qulh0wZXMIEB1g0KTwQ9G8OhBN4";
-const FILTER = "&filter=full";
-const ORDER = "&orderBy=newest";
+const FILTER = "&filter=free-ebooks";
+const ORDER = "&orderBy=relevance"
+const MAXRESULTS = "&maxResults=40";
 
 export default {
 	// Gets all items
@@ -19,22 +20,12 @@ export default {
 	},
 	// Saves an item to the database
 	saveBook: function(bookData) {
-		console.log(`savebooks`, bookData)
+		console.log(`in api.js save book`)
 		return axios.post("/api/books", bookData);
 	},
 	search: function(query) {
-		console.log (`in api search`, query);
-		let googleUrl = BASEURL + query + FILTER + ORDER + APIKEY;
-		console.log(`google url`, googleUrl);
+		let googleUrl = BASEURL + query + FILTER + ORDER + MAXRESULTS + APIKEY;
 		return axios.get(googleUrl);
 	  }
 	
-	// // Gets all users with given name
-	// checkLogin: function(name) {
-	// 	return axios.get("/api/users/?name=" + name);
-	// },
-	// // Creates new user
-	// createUser: function(userData) {
-	// 	return axios.post("/api/users/", userData);
-	// }
 };

@@ -3,19 +3,18 @@ import Jumbotron from "../../components/Jumbotron";
 import SaveBtn from "../../components/SaveBtn";
 import ViewBtn from "../../components/ViewBtn";
 import Viewbook from "../../components/Viewbook";
-
+import Pictureborder from "../../components/Pictureborder";
 import API from "../../Utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListBook } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
-import ResultsList from "../../components/Resultslist";
+import { Input, FormBtn } from "../../components/Form";
 
 
 
 class Books extends Component {
     state = {
         view: false,
-        id:"",
+        id: "",
         books: [],
         title: "",
         authors: [],
@@ -33,43 +32,34 @@ class Books extends Component {
     searchGoogleBooks = query => {
         API.search(query)
             .then(res => {
-                console.log(`results`, res.data.items[0].volumeInfo);
-                console.log('in search googlebooks', this.state.view)
                 this.setState({
                     books: res.data.items,
                     title: "",
                     authors: [],
-                    // description: "",
-                    // image: "",
-                    // infoLink: "",
-                    // user: "Ilene",
                     view: false
                 })
-                console.log(`books `, this.state.books);
-                // this.setState({ results: res.data })
             })
-
             .catch(err => console.log(err));
     };
+    // this function sets up the data to be displayed from the api
+    // if the view button is clicked, then additional information about the book will be displayed
 
     viewBook = (event) => {
-        console.log(`in viewbook`, event.target.id);
         //id is returned as a string, so need to convert to integer to determine which book was clicked
         let id = parseInt(event.target.id);
         let books = [...this.state.books];
-        console.log(`in view book  this state.view`, this.state.view)
         this.setState({
             title: books[id].volumeInfo.title,
             authors: books[id].volumeInfo.authors,
             description: books[id].volumeInfo.description,
-            image: books[id].volumeInfo.image,
+            image: books[id].volumeInfo.imageLinks.smallThumbnail,
             infoLink: books[id].volumeInfo.infoLink,
             id: id,
             view: true
 
         })
-        console.log(`after set state view book`, this.state.view);
     };
+    //this function saves a book information to the mongo database
 
     saveBook = (event) => {
         //id is returned as a string, so need to convert to integer to determine which book was clicked
@@ -79,21 +69,18 @@ class Books extends Component {
             title: books[id].volumeInfo.title,
             authors: books[id].volumeInfo.authors,
             description: books[id].volumeInfo.description,
-            image: books[id].volumeInfo.image,
+            image: books[id].volumeInfo.imageLinks.smallThumbnail,
             infoLink: books[id].volumeInfo.infoLink,
             user: "Ilene"
         })
             .then(res =>
                 this.setState({
                     title: "",
-                    authors: []
-                    // description: "",
-                    // image: "",
-                    // infoLink: ""
+                    authors: [],
+                    image: ""
                 }))
-
-            // .then(res => this.loadBooks())
             .catch(err => console.log(err));
+
     };
 
 
@@ -117,13 +104,23 @@ class Books extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-6">
+                    <Pictureborder></Pictureborder>
+                </Row>
+                <Row>
+                    <Col size="sm-12">
                         <Jumbotron>
                             <h1>
                                 Google Books Search
 							</h1>
                             <h2> Search and Save Books</h2>
                         </Jumbotron>
+                    </Col>
+                </Row>
+                <Row>
+                    <Pictureborder></Pictureborder>
+                </Row>
+                <Row>
+                    <Col size="sm-12">
                         <form>
                             <h2>Book Search</h2>
                             <Input
@@ -141,25 +138,24 @@ class Books extends Component {
 							</FormBtn>
                         </form>
                     </Col>
-                </Row>
+                </Row >
                 <Row>
                     {this.state.books.length ? (
                         <List>
                             {this.state.books.map((book, index) => {
                                 return (
-                                    <ListBook key={book._id}>
-                                        title = {book.volumeInfo.title},
-                                        authors = {book.volumeInfo.authors}
-                                        {console.log (`in list view`, this.state.view)}
+                                    <ListBook key={book._id}
+                                        image={book.volumeInfo.imageLinks.smallThumbnail}
+                                        title={book.volumeInfo.title}
+                                        authors={book.volumeInfo.authors} >
                                         {this.state.view && this.state.id === index ?
-                                            <Viewbook>
-                                                description = {book.volumeInfo.description}
-                                                image = {book.volumeInfo.smallThumbnail}
-                                                infoLink = {book.volumeInfo.infoLink}
+                                            <Viewbook
+                                                description={book.volumeInfo.description}
+                                                infoLink={book.volumeInfo.infoLink}>
                                                 view = false
                                             </Viewbook> : null}
 
-                                        <ViewBtn id={index} onClick={this.viewBook}></ViewBtn>
+                                        < ViewBtn id={index} onClick={this.viewBook} ></ViewBtn>
                                         <SaveBtn id={index} onClick={this.saveBook}></SaveBtn>
 
                                     </ListBook>
