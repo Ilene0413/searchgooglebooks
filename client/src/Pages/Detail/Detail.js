@@ -10,6 +10,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListBook } from "../../components/List";
 
 
+
 class Detail extends Component {
 	state = {
 		view: false,
