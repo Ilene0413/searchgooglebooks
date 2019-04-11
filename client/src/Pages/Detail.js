@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListBook } from "../components/List";
-import Jumbotron from "../components/Jumbotron/Jumbotron";
-import ViewBtn from "../components/ViewBtn/ViewBtn";
-import Pictureborder from "../components/Pictureborder/Pictureborder";
-import DeleteBtn from "../components/DeleteBtn/DeleteBtn";
+import Jumbotron from "../components/Jumbotron";
+import ViewBtn from "../components/ViewBtn";
+import Pictureborder from "../components/Pictureborder";
+import DeleteBtn from "../components/DeleteBtn";
 import Viewbook from "../components/Viewbook";
 
 import API from "../Utils/API";
