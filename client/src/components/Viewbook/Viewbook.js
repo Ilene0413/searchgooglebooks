@@ -1,5 +1,4 @@
 import React from "react";
-import Books from "../../Pages/Books/Books";
 
 export function Viewbook(props) {
   return (

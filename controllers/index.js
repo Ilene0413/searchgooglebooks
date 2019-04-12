@@ -1,7 +1,6 @@
-const Books = require("./booksController");
-const Users = require("./usersController");
+const Books = require("./booksController")
 
 module.exports = {
-	Books,
-	Users
+	Books
+	
 };

@@ -160,7 +160,7 @@ class Books extends Component {
                                 );
                             })}
                         </List>
-                    ) : (<h3></h3>
+                    ) : (<br></br>
 
                         )}
                 </Row>

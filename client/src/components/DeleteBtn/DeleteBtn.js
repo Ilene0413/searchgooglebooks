@@ -1,7 +1,5 @@
 import React from "react";
-
-// The ...props means, spread all of the passed props onto this element
-// That way we don't have to define them all individually
+// this creates a delete button if want to delete book from database
 function DeleteBtn(props) {
   return (
     <button className="delete-btn" {...props} tabIndex="0">

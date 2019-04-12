@@ -10,9 +10,12 @@ function App() {
     <Router>
       <div>
         <Nav />
+        <Switch>
           <Route exact path="/" component={Books} />
           <Route exact path="/books" component={Books} />
           <Route exact path="/saved" component={Detail} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
     </Router>
   );
